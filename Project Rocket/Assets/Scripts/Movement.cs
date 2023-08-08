@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -19,15 +21,22 @@ public class Movement : MonoBehaviour
     //Get the Inputs from the User
     void GetUserInput()
     {
-        //If Space Bar or W is pressed
-        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W))
-        {
-            //Boost Rocketship up
-            Debug.Log("Pressed Space - Boosting");
-        }
+        //If Space or W
+        GetUserBoost();
 
         //If A and D are pressed
         GetUserRotate();
+    }
+
+    //Get the Space and W Input
+    void GetUserBoost()
+    {
+        //If Space Bar or W is pressed
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W))
+        {
+            //Relative Force for Rockect
+            rb.AddRelativeForce(0, 1, 0);
+        }
     }
 
     //Get the Rotate Input
@@ -37,7 +46,6 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         {
             //Rotate Rocketship Left
-            Debug.Log("Pressed A - Rotating Left");
         }
         //If D is pressed
         if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
