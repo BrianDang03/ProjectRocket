@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    [SerializeField] float boostStr = 0;
+    [SerializeField] float rotationStr = 0;
     Rigidbody rb;
 
     // Start is called before the first frame update
@@ -35,7 +37,7 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W))
         {
             //Relative Force for Rockect
-            rb.AddRelativeForce(0, 1, 0);
+            rb.AddRelativeForce(Vector3.up * boostStr * Time.deltaTime);
         }
     }
 
@@ -46,13 +48,26 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         {
             //Rotate Rocketship Left
+            ApplyRotation(rotationStr);
         }
         //If D is pressed
         if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
         {
             //Rotate Rocketship Rigth
-            Debug.Log("Pressed D - Rotating Right");
+            ApplyRotation(-rotationStr);
         }
     }
 
+    ////Rotate Rocketship
+    void ApplyRotation(float rotationThisFrame)
+    {
+        //Freeze Rotation
+        rb.freezeRotation = true;
+
+        //Rotate Rocketship based on + or - 
+        transform.Rotate(Vector3.forward * rotationThisFrame * Time.deltaTime);
+
+        //Unfreeze Rotation
+        rb.freezeRotation = false;
+    }
 }
