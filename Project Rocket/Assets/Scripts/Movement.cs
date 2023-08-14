@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -7,11 +8,13 @@ public class Movement : MonoBehaviour
     [SerializeField] float boostStr = 0;
     [SerializeField] float rotationStr = 0;
     Rigidbody rb;
+    AudioSource audioS;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioS = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -38,6 +41,18 @@ public class Movement : MonoBehaviour
         {
             //Relative Force for Rockect
             rb.AddRelativeForce(Vector3.up * boostStr * Time.deltaTime);
+
+            //If SFX is not playing
+            if (!audioS.isPlaying)
+            {
+                //Play the SFX
+                audioS.Play();
+            }
+        }
+        else
+        {
+            //Stop the SFX
+            audioS.Stop();
         }
     }
 
