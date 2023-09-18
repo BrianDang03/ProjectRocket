@@ -1,6 +1,7 @@
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
@@ -13,14 +14,34 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("Safe Zone");
                 break;
             case "Finish":
-                Debug.Log("Finished");
+                LoadNextLevel();
                 break;
             case "Fuel":
                 Debug.Log("Refueled");
                 break;
             default:
-                Debug.Log("Rocketship Exploded");
+                ReloadLevel();
                 break;
         }
+    }
+
+    void ReloadLevel()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        //Restart Scene
+        SceneManager.LoadScene(currentSceneIndex);
+    }
+
+    void LoadNextLevel()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        {
+            //Go to Level 1
+            nextSceneIndex = 0;
+        }
+        //Next Level
+        SceneManager.LoadScene(nextSceneIndex);
     }
 }
