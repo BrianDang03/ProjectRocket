@@ -272,6 +272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918dcd7b5da710d428b9ca574ae4dbf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnDelay: 1
+  respawnDelay: 2
   successNoise: {fileID: 8300000, guid: d18662b64f4122048bd2285e60ff76bf, type: 3}
   crashNoise: {fileID: 8300000, guid: d6237270f9377a7478fa599825ce5435, type: 3}

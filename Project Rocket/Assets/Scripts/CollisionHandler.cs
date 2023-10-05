@@ -11,6 +11,8 @@ public class CollisionHandler : MonoBehaviour
 
     AudioSource audioS;
 
+    bool isTransitioning = false;
+
     void Start()
     {
         audioS = GetComponent<AudioSource>();
@@ -18,6 +20,8 @@ public class CollisionHandler : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        if (isTransitioning) { return; }
+
         //If Rocketship Collides
         switch (other.gameObject.tag)
         {
@@ -35,7 +39,9 @@ public class CollisionHandler : MonoBehaviour
 
     void StartCrashSequence()
     {
-        //Crash Audio, Stop Player Movement, and Reload
+        //Crash Audio, Stop Player Movement, Thrust Audio and Reload
+        isTransitioning = true;
+        audioS.Stop();
         audioS.PlayOneShot(crashNoise);
         GetComponent<Movement>().enabled = false;
         Invoke("ReloadLevel", respawnDelay);
@@ -43,7 +49,9 @@ public class CollisionHandler : MonoBehaviour
 
     void StartNextLevelSequence()
     {
-        //Success Audio, Stop Player Movement, and Next Level
+        //Success Audio, Stop Player Movement, Thrust Audio, and Next Level
+        isTransitioning = true;
+        audioS.Stop();
         audioS.PlayOneShot(successNoise);
         GetComponent<Movement>().enabled = false;
         Invoke("LoadNextLevel", respawnDelay);
