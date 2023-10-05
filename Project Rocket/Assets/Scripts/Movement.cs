@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] float boostStr = 0;
     [SerializeField] float rotationStr = 0;
+    [SerializeField] AudioClip thrusterNoise;
     Rigidbody rb;
     AudioSource audioS;
 
@@ -46,7 +47,7 @@ public class Movement : MonoBehaviour
             if (!audioS.isPlaying)
             {
                 //Play the SFX
-                audioS.Play();
+                audioS.PlayOneShot(thrusterNoise);
             }
         }
         else

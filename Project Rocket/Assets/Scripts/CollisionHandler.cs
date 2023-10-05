@@ -5,6 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    [SerializeField] float respawnDelay = 0f;
+    [SerializeField] AudioClip successNoise;
+    [SerializeField] AudioClip crashNoise;
+
+    AudioSource audioS;
+
+    void Start()
+    {
+        audioS = GetComponent<AudioSource>();
+    }
+
     void OnCollisionEnter(Collision other)
     {
         //If Rocketship Collides
@@ -22,15 +33,18 @@ public class CollisionHandler : MonoBehaviour
         }
     }
 
-    [SerializeField] float respawnDelay = 0f;
     void StartCrashSequence()
     {
+        //Crash Audio, Stop Player Movement, and Reload
+        audioS.PlayOneShot(crashNoise);
         GetComponent<Movement>().enabled = false;
         Invoke("ReloadLevel", respawnDelay);
     }
 
     void StartNextLevelSequence()
     {
+        //Success Audio, Stop Player Movement, and Next Level
+        audioS.PlayOneShot(successNoise);
         GetComponent<Movement>().enabled = false;
         Invoke("LoadNextLevel", respawnDelay);
     }
