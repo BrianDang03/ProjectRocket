@@ -14,15 +14,25 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("Safe Zone");
                 break;
             case "Finish":
-                LoadNextLevel();
-                break;
-            case "Fuel":
-                Debug.Log("Refueled");
+                StartNextLevelSequence();
                 break;
             default:
-                ReloadLevel();
+                StartCrashSequence();
                 break;
         }
+    }
+
+    [SerializeField] float respawnDelay = 0f;
+    void StartCrashSequence()
+    {
+        GetComponent<Movement>().enabled = false;
+        Invoke("ReloadLevel", respawnDelay);
+    }
+
+    void StartNextLevelSequence()
+    {
+        GetComponent<Movement>().enabled = false;
+        Invoke("LoadNextLevel", respawnDelay);
     }
 
     void ReloadLevel()
