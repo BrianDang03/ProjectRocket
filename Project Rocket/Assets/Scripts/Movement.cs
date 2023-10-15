@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
     [SerializeField] float boostStr = 0;
     [SerializeField] float rotationStr = 0;
     [SerializeField] AudioClip thrusterNoise;
+
+    [SerializeField] ParticleSystem mainThruster;
+    [SerializeField] ParticleSystem leftThruster;
+    [SerializeField] ParticleSystem rightThruster;
+
     Rigidbody rb;
     AudioSource audioS;
 
@@ -40,37 +46,85 @@ public class Movement : MonoBehaviour
         //If Space Bar or W is pressed
         if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W))
         {
-            //Relative Force for Rockect
-            rb.AddRelativeForce(Vector3.up * boostStr * Time.deltaTime);
-
-            //If SFX is not playing
-            if (!audioS.isPlaying)
-            {
-                //Play the SFX
-                audioS.PlayOneShot(thrusterNoise);
-            }
+            StartThrusting();
         }
         else
         {
-            //Stop the SFX
-            audioS.Stop();
+            StopThrusting();
         }
     }
 
     //Get the Rotate Input
     void GetUserRotate()
     {
+        RotatingLeft();
+
+        RotatingRight();
+    }
+
+    void StartThrusting()
+    {
+        //Relative Force for Rockect
+        rb.AddRelativeForce(Vector3.up * boostStr * Time.deltaTime);
+
+        //If SFX is not playing
+        if (!audioS.isPlaying)
+        {
+            //Play the SFX
+            audioS.PlayOneShot(thrusterNoise);
+        }
+
+        //Play Main Thruster
+        if (!mainThruster.isPlaying)
+        {
+            mainThruster.Play();
+        }
+    }
+
+    void StopThrusting()
+    {
+        //Stop the SFX
+        audioS.Stop();
+
+        //Stop Main Thruster
+        mainThruster.Stop();
+    }
+
+    void RotatingLeft()
+    {
         //If A is pressed
         if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         {
             //Rotate Rocketship Left
             ApplyRotation(rotationStr);
+
+            if (!leftThruster.isPlaying)
+            {
+                leftThruster.Play();
+            }
         }
+        else
+        {
+            leftThruster.Stop();
+        }
+    }
+
+    void RotatingRight()
+    {
         //If D is pressed
         if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
         {
             //Rotate Rocketship Rigth
             ApplyRotation(-rotationStr);
+
+            if (!rightThruster.isPlaying)
+            {
+                rightThruster.Play();
+            }
+        }
+        else
+        {
+            rightThruster.Stop();
         }
     }
 

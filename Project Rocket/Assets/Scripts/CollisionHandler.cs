@@ -13,6 +13,7 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] ParticleSystem crashParticle;
 
     AudioSource audioS;
+    bool collisionDisabled = false;
 
     bool isTransitioning = false;
 
@@ -21,9 +22,26 @@ public class CollisionHandler : MonoBehaviour
         audioS = GetComponent<AudioSource>();
     }
 
+    void Update()
+    {
+        GetUserCheats();
+    }
+
+    void GetUserCheats()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadNextLevel();
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            collisionDisabled = !collisionDisabled;
+        }
+    }
+
     void OnCollisionEnter(Collision other)
     {
-        if (isTransitioning) { return; }
+        if (isTransitioning || collisionDisabled) { return; }
 
         //If Rocketship Collides
         switch (other.gameObject.tag)
