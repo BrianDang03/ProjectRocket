@@ -19,7 +19,7 @@ Objective: Fly the rocket, avoid the obstacles, and get to the landing pad.
 *******************************************************
 * C# Scripts
 *******************************************************
-Name: CollisionHandler, handles all the collisions of the game.
+Name: CollisionHandler, handles all the collisions of the game. Debugging: (L: Go to next level | C: Stops all collisions)
 
 Name: Movement, handles the movement of the rocket. Controls: (W or Space: Fly | A: Rotate Left | D: Rotate Right)
 
@@ -29,7 +29,7 @@ Name QuitApplication, pressing ESC quits the application.
 *******************************************************
 * Circumstances of Game
 *******************************************************
-It is in good place to stop development for now. Will be work on in the future. 
+It is in a good place to stop development for now. Will be worked on in the future. 
 
 Ideas to implemet: Day and Night Cycles, Darkness machanic, Fuel gauge, enemy type, and more.
 *******************************************************
