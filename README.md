@@ -4,7 +4,7 @@
 *******************************************************
 Project Rokect
 *******************************************************
-* Objective: Fly the rocket, avoid the obstacles, and get to the landing pad.  
+Objective: Fly the rocket, avoid the obstacles, and get to the landing pad.  
 *******************************************************
 * Description of Game
 *******************************************************
