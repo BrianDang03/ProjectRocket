@@ -19,11 +19,11 @@ Objective: Fly the rocket, avoid the obstacles, and get to the landing pad.
 *******************************************************
 * C# Scripts
 *******************************************************
-Name: CollisionHandler, handle all the collisions of the game.
+Name: CollisionHandler, handles all the collisions of the game.
 
-Name: Movement, handle the movement of the rocket. Controls: (W or Space: Fly | A: Rotate Left | D: Rotate Right)
+Name: Movement, handles the movement of the rocket. Controls: (W or Space: Fly | A: Rotate Left | D: Rotate Right)
 
-Name: Oscillator, handle the movement of the obstacles.
+Name: Oscillator, handles the movement of the obstacles.
 
 Name QuitApplication, pressing ESC quits the application.
 *******************************************************
