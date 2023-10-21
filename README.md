@@ -2,7 +2,7 @@
 * Name      : Brian Dang
 * Date      : 10/20/2023
 *******************************************************
-Project Rokect
+Project Rocket
 *******************************************************
 Objective: Fly the rocket, avoid the obstacles, and get to the landing pad.  
 *******************************************************
